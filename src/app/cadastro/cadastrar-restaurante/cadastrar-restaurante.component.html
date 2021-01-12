@@ -1,0 +1,85 @@
+<mat-progress-bar *ngIf="mostrarBarraProgresso" mode="indeterminate"></mat-progress-bar>
+
+<form [formGroup]="formRestaurante" class="largura-form">
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nome do restaurante</mat-label>
+                    <input matInput formControlName="nome">
+                    <mat-error *ngIf="nomeRestaurante.errors?.required">
+                      Nome do restaurante deve ser informado
+                    </mat-error>
+                    <mat-error *ngIf="nomeRestaurante.errors?.minlength">
+                      Nome do restaurante deve conter no minimo 3 caracteres
+                    </mat-error>
+                    <mat-error *ngIf="nomeRestaurante.errors?.maxlength">
+                      Nome do restaurante deve conter no maximo 100 caracteres
+                    </mat-error>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Tipo da Cozinha</mat-label>
+                    <mat-select formControlName="tipoCozinha" >
+                      <mat-option value="1">Brasileira</mat-option>
+                      <mat-option value="2">Mexicana</mat-option>
+                      <mat-option value="3">Japonesa</mat-option>
+                      <mat-option value="4">Americana - US</mat-option>
+                      <mat-option value="5">Francesa</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="tipoCozinha.errors?.required">
+                      Tipo de cozinha deve ser informado
+                    </mat-error>
+                  </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>CEP</mat-label>
+                    <input matInput placeholder="00000-000" formControlName="CEP" maxlength="9"
+                      (blur)="buscarEnderecoPorCEP()" [value]="formRestaurante.controls['CEP'].value | formatarCEP" >
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Logradouro</mat-label>
+                    <input matInput placeholder="Logradouro" formControlName="logradouro" >
+                </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                  <mat-label>Número</mat-label>
+                  <input matInput name="numero" placeholder="Número" formControlName="numero" >
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                  <mat-label>UF</mat-label>
+                  <input matInput placeholder="UF" formControlName="UF">
+              </mat-form-field>
+          </td>
+        </tr>
+    </table>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Cidade</mat-label>
+                    <input matInput placeholder="Cidade" formControlName="cidade">
+                </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                  <mat-label>Bairro</mat-label>
+                  <input matInput placeholder="Bairro" formControlName="bairro" >
+              </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <button mat-button color="primary" (click)="cadastrar()" [disabled]="this.formRestaurante.invalid" >Cadastrar</button>
+  </form>
+

@@ -1,0 +1,9 @@
+table {
+    margin-left: 1%;
+    width: 98%;
+}
+
+.selecionar {
+    cursor: pointer;
+    padding-left: 5%;
+}
